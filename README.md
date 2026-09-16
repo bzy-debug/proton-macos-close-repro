@@ -11,6 +11,8 @@ LLDB 临时 retain 一次 `CefBrowserHostView`，延后它的析构，让应用�
 
 ## Upstream status
 
+Report for this repository: [Proton #312](https://github.com/moonbit-community/proton/issues/312).
+
 This repository preserves a **Proton 0.2.9 LLDB-assisted timing reproduction**.
 It is not a report that current Proton main is affected.
 

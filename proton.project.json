@@ -1,0 +1,12 @@
+{
+  "identifier": "dev.repro.proton-close",
+  "backend": {
+    "path": ".",
+    "package": "app"
+  },
+  "package": {
+    "product_name": "Proton Close Repro",
+    "version": "0.1.0",
+    "output": "dist"
+  }
+}

@@ -1,0 +1,45 @@
+(lldb) target create "dist/Proton Close Repro.app/Contents/MacOS/proton-close-repro"
+Current executable set to '<repro-root>/dist/Proton Close Repro.app/Contents/MacOS/proton-close-repro' (arm64).
+(lldb) command source -s 0 'reproduce.lldb'
+Executing commands in '<repro-root>/reproduce.lldb'.
+(lldb) # Diagnostic timing experiment for Proton 0.2.9, not an unassisted reproducer.
+(lldb) settings set target.env-vars OS_ACTIVITY_MODE=disable
+(lldb) breakpoint set --name proton_engine_window_commit_appkit_close --one-shot true
+Breakpoint 1: where = proton-close-repro`proton_engine_window_commit_appkit_close + 20 at mac_window.objc.c:424:7, address = 0x0000000100227138
+(lldb) breakpoint command add 1
+(lldb) # Error branch, NOT the normal state query entry point.
+(lldb) breakpoint set --file mac_window.objc.c --line 2128 --one-shot true
+Breakpoint 2: where = proton-close-repro`proton_engine_window_get_state + 304 at mac_window.objc.c:2128:31, address = 0x000000010022c714
+(lldb) breakpoint command add 2
+(lldb) run
+(lldb)  expression -l objc++ -- id $held_view = (id)[(id)window->browser_view retain]
+(lldb)  continue
+Process 47260 resuming
+Command #2 'continue' continued the target.
+(lldb)  expression window->window
+(NSWindow *) $0 = nil
+(lldb)  expression window->closed
+(int) $1 = 0
+(lldb)  expression window->appkit_closing
+(int) $2 = 1
+(lldb)  thread backtrace -c 12
+* thread #1, name = 'CrBrowserMain', queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+  * frame #0: 0x000000010022c714 proton-close-repro`proton_engine_window_get_state(window=0x00000104004786c0, out_state=0x000000016fdfd7fc, error="", error_len=512) at mac_window.objc.c:2128:31
+    frame #1: 0x00000001002373d4 proton-close-repro`proton_runtime_sync_engine_window_states(runtime=0x0000010400c37850) at proton_state.c:333:22
+    frame #2: 0x000000010023da04 proton-close-repro`proton_internal_runtime_poll_event(runtime=0x0000010400c37850, out_event=0x0000010401b1ab88) at proton.c:505:14
+    frame #3: 0x000000010011e1bc proton-close-repro`_M0MP419moonbit_2dcommunity6proton8internal6native7Runtime11poll__event at native.mbt:1232:16
+    frame #4: 0x0000000100058c3c proton-close-repro`_M0MP219moonbit_2dcommunity6proton16RuntimeEventPump20poll__native__events at facade_runtime_events.mbt:25:17
+    frame #5: 0x0000000100058970 proton-close-repro`_M0MP219moonbit_2dcommunity6proton16RuntimeEventPump22drain__session__events at facade_runtime_events.mbt:52:18
+    frame #6: 0x00000001000406d4 proton-close-repro`_M0MP219moonbit_2dcommunity6proton14RuntimeSession22drain__runtime__events at facade_session.mbt:3044:3
+    frame #7: 0x0000000100040340 proton-close-repro`_M0MP219moonbit_2dcommunity6proton14RuntimeSession18pump__once_2einner(monitor_bridge=true) at facade_session.mbt:2893:6
+    frame #8: 0x000000010003edac proton-close-repro`_M0MP219moonbit_2dcommunity6proton14RuntimeSession3runC57839l2861 at facade_session.mbt:2862:5
+    frame #9: 0x000000010005dee4 proton-close-repro`_M0FP219moonbit_2dcommunity6proton20drive__wakeup__untilN16_2aasync__driverS24707 at facade_runtime_wakeup.mbt:52:20
+    frame #10: 0x000000010005e928 proton-close-repro`_M0FP219moonbit_2dcommunity6proton20drive__wakeup__untilC56267 + 160
+    frame #11: 0x0000000100140f54 proton-close-repro`_M0MP319moonbit_2dcommunity6proton4core17RuntimeWakeSignal17wait__for__changeC43891 + 324
+(lldb)  # Balance the extra retain before propagating the error.
+(lldb)  expression -l objc++ -- (void)[$held_view release]
+(lldb)  expression -l objc++ -- $held_view = (id)0
+(id) $3 = nil
+(lldb)  continue
+Process 47260 resuming
+Command #8 'continue' continued the target.

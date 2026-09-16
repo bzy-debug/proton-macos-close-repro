@@ -1,0 +1,4 @@
+timestamp=2026-09-16T03:44:56.072Z level=INFO category=proton.runtime source=facade_runtime.mbt:17:5-17:42@moonbit-community/proton message="application runtime starting"
+timestamp=2026-09-16T03:44:57.514Z level=INFO category=proton.window source=facade_session.mbt:1328:3-1328:39@moonbit-community/proton message="window created" window="main"
+timestamp=2026-09-16T03:44:57.622Z level=INFO category=proton.bridge source=facade_runtime.mbt:488:13-488:49@moonbit-community/proton message="renderer bridge ready" window_count=1
+timestamp=2026-09-16T03:46:33.054Z level=ERROR category=proton.runtime source=facade_runtime.mbt:115:3-115:41@moonbit-community/proton message="application runtime failed" code="runtime_operation_failed" error="runtime failed during poll event (-2): window is not initialized"

@@ -1,0 +1,115 @@
+(lldb) target create "/Applications/SeekMoon.app/Contents/MacOS/seekmoon"
+Current executable set to '/Applications/SeekMoon.app/Contents/MacOS/seekmoon' (arm64).
+(lldb) disassemble -n proton_engine_window_commit_appkit_close
+seekmoon`proton_engine_window_commit_appkit_close:
+seekmoon[0x100744d4c] <+0>:   sub    sp, sp, #0x50
+seekmoon[0x100744d50] <+4>:   stp    x29, x30, [sp, #0x40]
+seekmoon[0x100744d54] <+8>:   add    x29, sp, #0x40
+seekmoon[0x100744d58] <+12>:  stur   x0, [x29, #-0x8]
+seekmoon[0x100744d5c] <+16>:  stur   x1, [x29, #-0x10]
+seekmoon[0x100744d60] <+20>:  ldur   x8, [x29, #-0x8]
+seekmoon[0x100744d64] <+24>:  cbz    x8, 0x100744d88           ; <+60>
+seekmoon[0x100744d68] <+28>:  b      0x100744d6c               ; <+32>
+seekmoon[0x100744d6c] <+32>:  ldur   x8, [x29, #-0x10]
+seekmoon[0x100744d70] <+36>:  cbz    x8, 0x100744d88           ; <+60>
+seekmoon[0x100744d74] <+40>:  b      0x100744d78               ; <+44>
+seekmoon[0x100744d78] <+44>:  ldur   x8, [x29, #-0x8]
+seekmoon[0x100744d7c] <+48>:  ldr    x8, [x8, #0x8]
+seekmoon[0x100744d80] <+52>:  cbnz   x8, 0x100744d8c           ; <+64>
+seekmoon[0x100744d84] <+56>:  b      0x100744d88               ; <+60>
+seekmoon[0x100744d88] <+60>:  b      0x100744efc               ; <+432>
+seekmoon[0x100744d8c] <+64>:  ldur   x9, [x29, #-0x8]
+seekmoon[0x100744d90] <+68>:  mov    w8, #0x1                  ; =1
+seekmoon[0x100744d94] <+72>:  str    w8, [x9, #0x28]
+seekmoon[0x100744d98] <+76>:  ldur   x0, [x29, #-0x8]
+seekmoon[0x100744d9c] <+80>:  bl     0x100740ac0               ; proton_engine_window_close_views
+seekmoon[0x100744da0] <+84>:  ldur   x8, [x29, #-0x8]
+seekmoon[0x100744da4] <+88>:  ldr    x8, [x8, #0x198]
+seekmoon[0x100744da8] <+92>:  stur   x8, [x29, #-0x18]
+seekmoon[0x100744dac] <+96>:  b      0x100744db0               ; <+100>
+seekmoon[0x100744db0] <+100>: ldur   x8, [x29, #-0x18]
+seekmoon[0x100744db4] <+104>: cbz    x8, 0x100744dd8           ; <+140>
+seekmoon[0x100744db8] <+108>: b      0x100744dbc               ; <+112>
+seekmoon[0x100744dbc] <+112>: ldur   x8, [x29, #-0x18]
+seekmoon[0x100744dc0] <+116>: str    xzr, [x8, #0x10]
+seekmoon[0x100744dc4] <+120>: b      0x100744dc8               ; <+124>
+seekmoon[0x100744dc8] <+124>: ldur   x8, [x29, #-0x18]
+seekmoon[0x100744dcc] <+128>: ldr    x8, [x8, #0x78]
+seekmoon[0x100744dd0] <+132>: stur   x8, [x29, #-0x18]
+seekmoon[0x100744dd4] <+136>: b      0x100744db0               ; <+100>
+seekmoon[0x100744dd8] <+140>: ldur   x0, [x29, #-0x8]
+seekmoon[0x100744ddc] <+144>: bl     0x100743900               ; proton_engine_window_browser
+seekmoon[0x100744de0] <+148>: cbz    x0, 0x100744e10           ; <+196>
+seekmoon[0x100744de4] <+152>: b      0x100744de8               ; <+156>
+seekmoon[0x100744de8] <+156>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744dec] <+160>: ldr    x8, [x8]
+seekmoon[0x100744df0] <+164>: str    x8, [sp, #0x10]
+seekmoon[0x100744df4] <+168>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744df8] <+172>: ldr    x0, [x8, #0x58]
+seekmoon[0x100744dfc] <+176>: bl     0x10076cfec               ; proton_browser_lifecycle_browser_id
+seekmoon[0x100744e00] <+180>: mov    x1, x0
+seekmoon[0x100744e04] <+184>: ldr    x0, [sp, #0x10]
+seekmoon[0x100744e08] <+188>: bl     0x10076917c               ; proton_engine_bridge_pending_remove_browser
+seekmoon[0x100744e0c] <+192>: b      0x100744e10               ; <+196>
+seekmoon[0x100744e10] <+196>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744e14] <+200>: ldr    x8, [x8, #0x18]
+seekmoon[0x100744e18] <+204>: str    x8, [sp, #0x20]
+seekmoon[0x100744e1c] <+208>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744e20] <+212>: mov    x9, #0x0                  ; =0
+seekmoon[0x100744e24] <+216>: str    x9, [sp, #0x8]
+seekmoon[0x100744e28] <+220>: str    xzr, [x8, #0x8]
+seekmoon[0x100744e2c] <+224>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744e30] <+228>: str    xzr, [x8, #0x10]
+seekmoon[0x100744e34] <+232>: mov    w0, #0x4                  ; =4
+seekmoon[0x100744e38] <+236>: bl     0x10073d41c               ; proton_engine_signal_wait_source
+seekmoon[0x100744e3c] <+240>: ldr    x1, [sp]
+seekmoon[0x100744e40] <+244>: ldr    x2, [sp, #0x8]
+seekmoon[0x100744e44] <+248>: ldur   x0, [x29, #-0x10]
+seekmoon[0x100744e48] <+252>: bl     0x10078e080               ; objc_msgSend$makeFirstResponder:
+seekmoon[0x100744e4c] <+256>: ldr    x8, [sp, #0x20]
+seekmoon[0x100744e50] <+260>: cbz    x8, 0x100744e68           ; <+284>
+seekmoon[0x100744e54] <+264>: b      0x100744e58               ; <+268>
+seekmoon[0x100744e58] <+268>: ldr    x1, [sp]
+seekmoon[0x100744e5c] <+272>: ldr    x0, [sp, #0x20]
+seekmoon[0x100744e60] <+276>: bl     0x10078e320               ; objc_msgSend$removeFromSuperview
+seekmoon[0x100744e64] <+280>: b      0x100744e68               ; <+284>
+seekmoon[0x100744e68] <+284>: ldr    x1, [sp]
+seekmoon[0x100744e6c] <+288>: ldur   x8, [x29, #-0x8]
+seekmoon[0x100744e70] <+292>: mov    x2, #0x0                  ; =0
+seekmoon[0x100744e74] <+296>: str    xzr, [x8, #0x18]
+seekmoon[0x100744e78] <+300>: ldur   x0, [x29, #-0x10]
+seekmoon[0x100744e7c] <+304>: bl     0x10078e720               ; objc_msgSend$setDelegate:
+seekmoon[0x100744e80] <+308>: adrp   x8, 245
+seekmoon[0x100744e84] <+312>: ldr    x0, [x8, #0xe90]
+seekmoon[0x100744e88] <+316>: bl     0x10078cf88               ; symbol stub for: objc_alloc
+seekmoon[0x100744e8c] <+320>: ldr    x1, [sp]
+seekmoon[0x100744e90] <+324>: adrp   x8, 240
+seekmoon[0x100744e94] <+328>: ldr    x8, [x8, #0x5f8]
+seekmoon[0x100744e98] <+332>: ldr    d0, [x8]
+seekmoon[0x100744e9c] <+336>: ldr    d1, [x8, #0x8]
+seekmoon[0x100744ea0] <+340>: ldr    d2, [x8, #0x10]
+seekmoon[0x100744ea4] <+344>: ldr    d3, [x8, #0x18]
+seekmoon[0x100744ea8] <+348>: bl     0x10078dd40               ; objc_msgSend$initWithFrame:
+seekmoon[0x100744eac] <+352>: ldr    x1, [sp]
+seekmoon[0x100744eb0] <+356>: str    x0, [sp, #0x18]
+seekmoon[0x100744eb4] <+360>: ldur   x0, [x29, #-0x10]
+seekmoon[0x100744eb8] <+364>: ldr    x2, [sp, #0x18]
+seekmoon[0x100744ebc] <+368>: bl     0x10078e700               ; objc_msgSend$setContentView:
+seekmoon[0x100744ec0] <+372>: ldr    x0, [sp, #0x18]
+seekmoon[0x100744ec4] <+376>: adrp   x8, 240
+seekmoon[0x100744ec8] <+380>: ldr    x8, [x8, #0x888]
+seekmoon[0x100744ecc] <+384>: blr    x8
+seekmoon[0x100744ed0] <+388>: ldr    x8, [sp, #0x20]
+seekmoon[0x100744ed4] <+392>: cbz    x8, 0x100744ef0           ; <+420>
+seekmoon[0x100744ed8] <+396>: b      0x100744edc               ; <+400>
+seekmoon[0x100744edc] <+400>: ldr    x0, [sp, #0x20]
+seekmoon[0x100744ee0] <+404>: adrp   x8, 240
+seekmoon[0x100744ee4] <+408>: ldr    x8, [x8, #0x888]
+seekmoon[0x100744ee8] <+412>: blr    x8
+seekmoon[0x100744eec] <+416>: b      0x100744ef0               ; <+420>
+seekmoon[0x100744ef0] <+420>: ldur   x0, [x29, #-0x10]
+seekmoon[0x100744ef4] <+424>: bl     0x10078cfa0               ; symbol stub for: objc_autorelease
+seekmoon[0x100744ef8] <+428>: b      0x100744efc               ; <+432>
+seekmoon[0x100744efc] <+432>: ldp    x29, x30, [sp, #0x40]
+seekmoon[0x100744f00] <+436>: add    sp, sp, #0x50
+seekmoon[0x100744f04] <+440>: ret

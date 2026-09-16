@@ -1,0 +1,20 @@
+# Diagnostic timing experiment for Proton 0.2.9, not an unassisted reproducer.
+settings set target.env-vars OS_ACTIVITY_MODE=disable
+breakpoint set --name proton_engine_window_commit_appkit_close --one-shot true
+breakpoint command add 1
+expression -l objc++ -- id $held_view = (id)[(id)window->browser_view retain]
+continue
+DONE
+# Error branch, NOT the normal state query entry point.
+breakpoint set --file mac_window.objc.c --line 2128 --one-shot true
+breakpoint command add 2
+expression window->window
+expression window->closed
+expression window->appkit_closing
+thread backtrace -c 12
+# Balance the extra retain before propagating the error.
+expression -l objc++ -- (void)[$held_view release]
+expression -l objc++ -- $held_view = (id)0
+continue
+DONE
+run
